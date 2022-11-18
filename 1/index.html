@@ -12,6 +12,12 @@
                 text-align: center;
                 box-shadow: 0 0 30px rgba(0,0,0,0.5);
                 border-radius: 6px;  */
+                width: 600px; 
+                background: #ccc;
+                padding: 30px;
+                padding-right: 30px; 
+                border: solid 2px rgba(122, 118, 118, 0.884); 
+                float: left;
             }
             .SearchButt{
                 /* background-color: rgb(204, 62, 7);
@@ -25,14 +31,60 @@
                 border: 2px solid #CB5A5A;
                 color: azure; */
             }
+            .block {
+            width: 200px;
+            height: 175px;
+            display: inline-block;
+            filter: grayscale(0%);
+            transition: 1s;
+            color: steelblue;
+            font-size: 30px;
+          }
+          input {
+            display: none;
+          }
+          label {
+            display: inline-block;
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid silver;
+            cursor: pointer;
+            text-align: center;
+          }
+          label:after {
+            content: 'заказать';
+            font-size: 16px;
+            color: black;
+            position: relative;
+            top: -5px;
+          }
+          input:checked ~ label {
+            background-color: green;
+          }
+          input:checked ~ label:after {
+            content: 'успешно';
+            color: white;
+          }
         </style>
     </head>
     <body>
+        
+          <div class="block">
+            <img src="https://picsum.photos/id/223/200/150" alt="">text
+            <input type="checkbox" id="one" />
+            <label for="one"></label>
+          </div>
+          
+          <div class="block">
+            <img src="https://picsum.photos/id/222/200/150" alt="">text
+            <input type="checkbox" id="two" />
+            <label for="two"></label>
+          </div>
         <div class="SearchFrame">
-            <h1>Welcome</h1>
             <button>Eng</button>
             <button>Рус</button>
-            <form name="Search"> 
+            <form name="EnglishForm"> 
+                <h1>Welcome</h1>
                 <input type="search" size="60">
                 <input class="SearchButt" type="button" value="Search"> 
                 <br>
@@ -42,6 +94,18 @@
                 <button class="Buttons">Market</button>
                 <button class="Buttons">Chatinh NOW!</button>
                 <button class="Buttons">Topicks</button>
+            </form>
+            <form name="RussianForm"> 
+                <h1>Добро пожаловать</h1>
+                <input type="search" size="60">
+                <input class="SearchButt" type="button" value="Поиск"> 
+                <br>
+                <button class="Buttons">Новости</button>
+                <button class="Buttons">Музыка</button>
+                <button class="Buttons">Погода</button>
+                <button class="Buttons">Маркет</button>
+                <button class="Buttons">Обсуждают сейчас!</button>
+                <button class="Buttons">Темы</button>
             </form>
         </div>
     </body>
