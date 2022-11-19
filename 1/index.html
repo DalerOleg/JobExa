@@ -34,9 +34,10 @@
             .theme_buttons {
                 border-radius: 15px;
                 padding: 9px 15px;
-                margin: 15px 5px auto 5px;
+                margin: 15px 5px 10px 5px;
                 outline: none;
                 border: none;
+                box-shadow: 5px 5px 3px rgba(43, 42, 42, 0.753);
             }
             .search_bar {
                 border-radius: 15px;
@@ -44,13 +45,27 @@
                 font-size: 25px;
                 box-shadow: 5px 5px 3px rgba(43, 42, 42, 0.753);
                 outline: none;
+                padding: 0 0 0 5px;
+                /* margin: 0 0 0 -5px; */
+                max-width: 70%;
             }
             .SearchButton {
                 border: none;
                 border-radius: 15px;
                 font-size: 25px;
                 outline: none;
+                box-shadow: 5px 5px 3px rgba(43, 42, 42, 0.753);
                 
+            }
+            .texts {
+                border: 5px solid lightgray;
+                border-radius: 10px;
+                background-color: white;
+                color: black;
+                font-size: 18px;
+                padding: 10px 5px 5px 10px;
+                box-shadow: 5px 5px 3px rgba(43, 42, 42, 0.753);
+                height: 500px;
             }
             .tabs_block {
                 padding: 20px;
@@ -60,6 +75,7 @@
             .tabs_block:target {
                 display: block;
             }
+
         </style>
     </head>
     <body>
@@ -74,7 +90,7 @@
                     <div class="tabs_body">
                         <div id="en" class="tabs_block" lang="en">
                             <h1>Welcome</h1>
-                            <input class="search_bar" type="search" size="60">
+                            <input class="search_bar" type="search" size="55">
                             <input class="SearchButton" type="button" value="Search"> 
                             <br>
                             <button class="theme_buttons">News</button>
@@ -86,7 +102,7 @@
                         </div>
                         <div id="ru" class="tabs_block" lang="ru">
                             <h1>Добро пожаловать</h1>
-                            <input class="search_bar" type="search" size="60">
+                            <input class="search_bar" type="search" size="55">
                             <input class="SearchButton" type="button" value="Поиск"> 
                             <br>
                             <button class="theme_buttons">Новости</button>
@@ -98,7 +114,7 @@
                         </div>
                         <div id="fr" class="tabs_block" lang="fr">
                             <h1>Accueillir</h1>
-                            <input class="search_bar" type="search" size="60">
+                            <input class="search_bar" type="search" size="55">
                             <input class="SearchButton" type="button" value="Chercher"> 
                             <br>
                             <button class="theme_buttons">Nouvelles</button>
@@ -109,6 +125,12 @@
                             <button class="theme_buttons">Sujets</button>
                         </div>
                     </div>
+                </div>
+                <div class="texts">
+                    Разнообразный и богатый опыт говорит нам, что существующая теория предполагает независимые способы реализации своевременного выполнения сверхзадачи. 
+                    Наше дело не так однозначно, как может показаться: существующая теория в значительной степени обусловливает важность первоочередных требований. 
+                    С учётом сложившейся международной обстановки, социально-экономическое развитие создаёт предпосылки для поставленных обществом задач. 
+                    В своём стремлении улучшить пользовательский опыт мы упускаем, что активно развивающиеся страны третьего мира функционально разнесены на независимые элементы.
                 </div>
             </div>
         </div>
