@@ -6,16 +6,16 @@
         <style>
             .wrapper{
                 border: 2px solid darkblue;
-                width: 500px;
+                width: 700px;
                 margin: 5%;
                 padding: 5%;
             }
-            .doughnut_bar {
+            /* .doughnut_bar {
                 border: 2px solid darkblue;
-                width: 500px;
+                width: 70px;
                 margin: 5%;
                 padding: 5%;
-            }
+            } */
 
         </style>
     </head>
@@ -61,23 +61,33 @@
                 new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    //labels: ['A', 'B', 'C', 'D', 'E', 'F'],
                     datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
+                    //label: '!!!!!!!!!!',
+                    data: [1,1,1,1,1],
+                    borderWidth: 4,
+                    cutout: `90%`
                     }]
                 },
                     options: {
-                    scales: {
+                    animation: false,
+                    legend: {
+                    display: false,
+                    tooltip: {
+                    enabled: false,
+                    scales: {        
                     y: {
-                    beginAtZero: true
+                    display: false,
+                    beginAtZero: true,
                     }
                     }
+                }
+                }
                 }
                 });
 
             </script>
+
           </div>
         </div>
     </body>
