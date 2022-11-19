@@ -17,15 +17,40 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
             .content{
+                border-radius: 15px;
+                box-shadow: 0px 30px 50px rgb(14, 12, 12);
+                border: 5px outset lightseagreen;
                 max-width: 1000px;
-                padding: 50px 0;
+                padding: 40px 40px;
                 margin: 0px auto;
+                
+            }
+            .tabs_items {
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                height: 100%; 
+                font-size: 18px;
             }
             .theme_buttons {
-
+                border-radius: 15px;
+                padding: 9px 15px;
+                margin: 15px 5px auto 5px;
+                outline: none;
+                border: none;
+            }
+            .search_bar {
+                border-radius: 15px;
+                border: 5px dotted white;
+                font-size: 25px;
+                box-shadow: 5px 5px 3px rgba(43, 42, 42, 0.753);
+                outline: none;
             }
             .SearchButton {
-
+                border: none;
+                border-radius: 15px;
+                font-size: 25px;
+                outline: none;
+                
             }
             .tabs_block {
                 padding: 20px;
@@ -49,7 +74,7 @@
                     <div class="tabs_body">
                         <div id="en" class="tabs_block" lang="en">
                             <h1>Welcome</h1>
-                            <input type="search" size="60">
+                            <input class="search_bar" type="search" size="60">
                             <input class="SearchButton" type="button" value="Search"> 
                             <br>
                             <button class="theme_buttons">News</button>
@@ -61,7 +86,7 @@
                         </div>
                         <div id="ru" class="tabs_block" lang="ru">
                             <h1>Добро пожаловать</h1>
-                            <input type="search" size="60">
+                            <input class="search_bar" type="search" size="60">
                             <input class="SearchButton" type="button" value="Поиск"> 
                             <br>
                             <button class="theme_buttons">Новости</button>
@@ -73,7 +98,7 @@
                         </div>
                         <div id="fr" class="tabs_block" lang="fr">
                             <h1>Accueillir</h1>
-                            <input type="search" size="60">
+                            <input class="search_bar" type="search" size="60">
                             <input class="SearchButton" type="button" value="Chercher"> 
                             <br>
                             <button class="theme_buttons">Nouvelles</button>

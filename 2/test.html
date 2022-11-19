@@ -4,8 +4,32 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <!-- <script src="alert.js"></script> -->
+        <div>
+        <canvas id="myChart"></canvas>
+    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.js"> </script>
         <script>
+            const data = {
+                labels: [
+                    'Red',
+                    'Blue',
+                    'Yellow'
+                ],
+                datasets: [{
+                label: 'My First Dataset',
+                data: [300, 50, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+                    }]
+                };
+          </script>
+        <!-- <script src="alert.js"></script> -->
+        <!--<script> 
         // let First;
         // First=999999999;
         // alert(First);
@@ -28,6 +52,6 @@
             //let a=1, b=1;
             //namb = (a+b <4 )? "smal": "large"
             //alert(namb);
-        </script>
+        </script>-->
     </body>
 </html>
