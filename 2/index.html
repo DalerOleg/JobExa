@@ -6,86 +6,58 @@
         <style>
             .wrapper{
                 border: 2px solid darkblue;
-                width: 700px;
+                width: 300px;
                 margin: 5%;
                 padding: 5%;
             }
-            /* .doughnut_bar {
-                border: 2px solid darkblue;
-                width: 70px;
-                margin: 5%;
+            .doughnut_bar {
+                border: 2px solid rgb(0, 130, 139);
+                width: 200px;
+                margin: 2%;
                 padding: 5%;
-            } */
+            }
 
         </style>
     </head>
     <body>
         <div class="wrapper">
-        <!-- <script src="alert.js"></script> -->
-        <script>
-        // let First;
-        // First=999999999;
-        // alert(First);
-        // const Veronika = love
-        // let age = prompt("How old are you?");
-            // alert(`You are ${age}`);
-            // let Name = prompt("Whats you name?");
-            // alert(`Welcome ${Name}`);
-            //             let value = 2;
-            //             let value1 = 2;
-            // alert(value - -value1);
-            //alert('1' + 2 + 2 ); 
-            //let namb = prompt("число");
-            // if (namb>0){
-            //     alert(1);
-            // }
-            // else if(namb < 0){
-            //     alert(-1);
-            // }else{alert(0);};
-            //let a=1, b=1;
-            //namb = (a+b <4 )? "smal": "large"
-            //alert(namb);
-        </script>
+            <div ></div>
+                <div class="doughnut_bar">
+                     <canvas id="myChart"></canvas>
+                </div>
 
-        <div>
-            <canvas id="myChart"></canvas>
-        </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                    const ctx = document.getElementById('myChart');
           
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-          <div class="doughnut_bar">
-
-            <script>
-                const ctx = document.getElementById('myChart');
-          
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                    //labels: ['A', 'B', 'C', 'D', 'E', 'F'],
-                    datasets: [{
-                    //label: '!!!!!!!!!!',
-                    data: [1,1,1,1,1],
-                    borderWidth: 4,
-                    cutout: `90%`
-                    }]
-                },
-                    options: {
-                    animation: false,
-                    legend: {
-                    display: false,
-                    tooltip: {
-                    enabled: false,
-                    scales: {        
-                    y: {
-                    display: false,
-                    beginAtZero: true,
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                        //labels: ['A', 'B', 'C', 'D', 'E', 'F'],
+                        datasets: [{
+                        //label: '!!!!!!!!!!',
+                        data: [0.12,1.2,0.80,0.40,0.56,0.30,0.45,0.24,0.72,0.9],
+                        borderWidth: 4,
+                        cutout: `90%`
+                        }]
+                        },
+                        options: {
+                        animation: false,
+                        legend: {
+                        display: false,
+                        tooltip: {
+                        enabled: false,
+                        scales: {        
+                        y: {
+                        display: false,
+                        beginAtZero: true,
+                        }
+                        }
                     }
                     }
-                }
-                }
-                }
-                });
-
+                    }
+                    });
             </script>
 
           </div>
