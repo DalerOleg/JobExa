@@ -9,37 +9,30 @@
                 box-sizing: border-box;
             }
             .wrapper {
+                min-height: 100%;
+                position: relative;
+            }
+            body {
+                background-color: #E5E5E5; 
+            }
+            .content {
+               
+            }
+            .sign_in_bar {
+                position: relative;
                 width: 360px;
                 height: 308px;
                 border: 1px solid #E4E8EB;
                 border-radius: 8px;
                 background-color: #ffffff;
-                margin: 15px 5px 10px 5px;
-                padding: 40px;
-                margin: 100px auto;
                 margin-left:auto;
                 margin-right: auto;
+                margin-top: 12%;   
                 text-align: center;
-
+                z-index: -2; 
             }
-            body {
-                background-color: #E5E5E5; 
-            }
-            .frame {
-
-            }
-            /* .sign_in_bar {
-                border: 1px solid #E4E8EB;
-                border-radius: 8px;
-                background-color: #ffffff;
-                margin: 15px 5px 10px 5px;
-                padding: 40px 40px;
-                margin: 0px auto;
-                margin-left:auto;
-                margin-right: auto;
-                padding: 0 0 0 30px;
-            } */
             .login_bar {
+                position: static;
                 border-radius: 6px;
                 border: 1px solid #D0D7DD;
                 margin: 10px auto;
@@ -47,10 +40,11 @@
                 width: 280px;
                 height: 32px;
                 outline: none;
-                text-indent: 6px;
-                
+                text-indent: 6px; 
+                z-index: 2;  
             }
             .sign_in_button {
+                position: static;
                 border-radius: 20px;
                 background-color: #107F8C;
                 margin: 40px auto;
@@ -59,24 +53,84 @@
                 height: 40px;
                 border: none;
                 color: #ffffff;
-                
+                z-index: 2;
             }
+
             button:hover {
                 background-color: #005E7F;
             }
+
             h2{
                 font-size: 16px;
             }
+            /* .load_animation {
+                width: 40px;
+                height: 40px;
+                background-color: #ffffff; 
+                border-radius: 50%;
+                border: 4px solid #ffffff;
+                border-top-color: blue;
+                border-image: linear-gradient(to right, rgb(236, 43, 9), rgb(43, 6, 252));
+                left: 50%;
+                top: 35%;
+                position: absolute ; 
+                opacity: 1;
+
+                animation-name: load_anim;
+                animation-duration: 1s;
+                animation-timing-function: linear;
+                animation-iteration-count: 3;
+                animation-delay: 1s, 0.5s;  
+            } */
+            .load_animation {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            margin: 30px;
+            border-radius: 50px;
+            background: rgb(125, 129, 127);
+            text-align: center;
+            left: 50%;
+            top: 65%;
+            }
+            
+            .load_animation:before{
+            content: "";
+            position: absolute;
+            top: -4px;
+            bottom: -4px;
+            left: -4px;
+            right: -4px;
+            background: conic-gradient(white,#0b20e0);
+            border-radius: 50px;
+            z-index: -1;
+            
+            animation-name: load_anim;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: 3;
+            animation-delay: 1s, 0.5s;  
+            }
+
+            @keyframes load_anim{
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
         </style>
     </head>
     <body>
         <div class="wrapper">
-            <div class="frame">
+            <div class="content">
+                <div class="load_animation"></div>
                 <div class="sign_in_bar">
-                    <h2>Вход в панель «Туризм»</h2> 
-                    <input class="login_bar" type="text" size="55" placeholder="Логин"><br>
-                    <input class="login_bar" type="password" size="55" placeholder="Пароль"> <br>
-                    <button class="sign_in_button">Войти</button>
+                    <form>
+                        <h2>Вход в панель «Туризм»</h2> 
+                        <input class="login_bar" type="text" placeholder="Логин"><br>
+                        <input class="login_bar" type="password" placeholder="Пароль"> <br>
+                        <button class="sign_in_button">Войти</button> 
+                    </form>
                 </div>
             </div>
         </div>
