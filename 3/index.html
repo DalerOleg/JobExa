@@ -2,32 +2,70 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Sign in</title>
+        <title>Login form</title>
 
         <style>
+            * {
+                box-sizing: border-box;
+            }
             .wrapper {
-               background-color: #E5E5E5; 
-               height: 100%;
+                width: 360px;
+                height: 308px;
+                border: 1px solid #E4E8EB;
+                border-radius: 8px;
+                background-color: #ffffff;
+                margin: 15px 5px 10px 5px;
+                padding: 40px;
+                margin: 100px auto;
+                margin-left:auto;
+                margin-right: auto;
+                text-align: center;
 
+            }
+            body {
+                background-color: #E5E5E5; 
             }
             .frame {
 
             }
-            .sign_in_bar {
+            /* .sign_in_bar {
                 border: 1px solid #E4E8EB;
                 border-radius: 8px;
                 background-color: #ffffff;
                 margin: 15px 5px 10px 5px;
                 padding: 40px 40px;
                 margin: 0px auto;
-            }
+                margin-left:auto;
+                margin-right: auto;
+                padding: 0 0 0 30px;
+            } */
             .login_bar {
                 border-radius: 6px;
                 border: 1px solid #D0D7DD;
+                margin: 10px auto;
+                font-size: 14px;
+                width: 280px;
+                height: 32px;
+                outline: none;
+                text-indent: 6px;
+                
             }
             .sign_in_button {
                 border-radius: 20px;
                 background-color: #107F8C;
+                margin: 40px auto;
+                font-size: 14px;
+                width: 280px;
+                height: 40px;
+                border: none;
+                color: #ffffff;
+                
+            }
+            button:hover {
+                background-color: #005E7F;
+            }
+            h2{
+                font-size: 16px;
             }
         </style>
     </head>
@@ -35,8 +73,8 @@
         <div class="wrapper">
             <div class="frame">
                 <div class="sign_in_bar">
-                    <h2>Вход в панельТуризм</h2> 
-                    <input class="login_bar" type="search" size="55" placeholder="Логин"><br>
+                    <h2>Вход в панель «Туризм»</h2> 
+                    <input class="login_bar" type="text" size="55" placeholder="Логин"><br>
                     <input class="login_bar" type="password" size="55" placeholder="Пароль"> <br>
                     <button class="sign_in_button">Войти</button>
                 </div>
