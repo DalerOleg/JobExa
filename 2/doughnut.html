@@ -1,85 +1,73 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>>Doughnut Chart</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-      }
-      /* .chartMenu {
-        width: 100vw;
-        height: 40px;
-        background: #1A1A1A;
-        color: rgba(255, 26, 104, 1);
-      } */
-      /* .chartMenu p {
-        padding: 10px;
-        font-size: 20px;
-      } */
-      .chartCard {
-        /* width: 100vw;
-        height: calc(100vh - 40px);
-        background: rgba(255, 6, 6, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center; */
-      }
-      .chartBox {
-        width: 500px;
-        padding: 40px;
-        margin: 20px;
-        border-radius: 20px;
-        border: solid 3px rgb(216, 3, 3);
-        background: rgb(255, 255, 255);
-      }
-    </style>
-  </head>
-  <body>
-    <!-- <div class="chartMenu">
-      <p>WWW.CHARTJS3.COM (Chart JS 3.9.1)</p>
-    </div> -->
-    <div class="chartCard">
-      <div class="chartBox">
-        <canvas id="myChart"></canvas>
-      </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>>Doughnut Chart</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      height: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: auto;
+    }
+
+    .chart-container {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
+
+    .chart-container>.chart {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="chart-container">
+      <canvas id="myChart" class="chart"></canvas>
     </div>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js" integrity="sha512-Tfw6etYMUhL4RTki37niav99C6OHwMDB2iBT5S5piyHO+ltK2YX8Hjy9TXxhE1Gm/TmAV0uaykSpnHKFIAif/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"
+    integrity="sha512-Tfw6etYMUhL4RTki37niav99C6OHwMDB2iBT5S5piyHO+ltK2YX8Hjy9TXxhE1Gm/TmAV0uaykSpnHKFIAif/A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    // setup https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js
+  <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js
+    "></script>
+
+  <script>
     const data = {
-      //labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       datasets: [{
-        //label: 'Weekly Sales',
         data: [5, 2, 11, 9, 1, 5, 7],
         backgroundColor: [
-          'rgba(255, 26, 104, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(0, 0, 0, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 26, 104, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(0, 0, 0, 1)'
-        ],
-        borderWidth: 1
+          '#117F8B',
+          '#31C1A6',
+          '#0574E0',
+          '#7F67E1',
+          '#3BB2CD',
+          '#47A2FD',
+          '#FE9702'
+        ]
       }]
     };
 
@@ -88,33 +76,35 @@
       type: 'doughnut',
       data,
       options: {
-        plugins: {
-            labels: {
-                position: `outside`,
-                fontSize: 20,
-                externalPadding: 2,
-            }
+        layout: {
+          padding: 30,
         },
-        cutout: `90%`,
+        plugins: {
+          labels: {
+            position: `outside`,
+            fontColor: data.datasets[0].backgroundColor,
+            textMargin: 4
+          }
+        },
+        cutout: `85%`,
         tooltip: {
-        enabled: false,
-        scales: {
-          y: {
-            beginAtZero: true
+          enabled: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-       }   
       },
-      //plugins: [ChartDataLabels]
 
     };
 
-    // render init block
     const myChart = new Chart(
       document.getElementById('myChart'),
       config
     );
-    </script>
+  </script>
 
-  </body>
+</body>
+
 </html>
