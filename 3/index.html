@@ -95,6 +95,7 @@
             left: 0;
             margin: auto;
             border: none;
+            display: none;
 
             animation-name: load_anim;
             animation-duration: 1s;
@@ -152,14 +153,18 @@
 
             xhr.onload = () => {
                 if (xhr.status == 200) {
-                    const user = JSON.parse(xhr.responseText)
-                    console.log(user.name, "-", user.age);
+                    const user = JSON.parse(xhr.responseText);
+                    //console.log(user.name, "-", user.age);
                 } else {
                     console.log("Server response: ", xhr.statusText);
                 }
             };
             xhr.send(data);
         }
+        function animation_change() {
+
+        }
+        
     </script>
 </body>
 

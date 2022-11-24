@@ -1,7 +1,6 @@
 
 const http = require("http");
 const fs = require("fs");
-const path = require(`path`);
 
 http.createServer(async (request, response) => {
   if (request.url == "/user") {
@@ -10,28 +9,21 @@ http.createServer(async (request, response) => {
       buffers.push(chunk);
     }
     const data = Buffer.concat(buffers).toString();
-    const user = JSON.parse(data); // парсим строку в json
+    const user = JSON.parse(data);
     console.log("----------------");
 
     if (user.login_send == "login1" && user.pass_send == "pass1") {
+      const errore_html = {
+        html_code: "<p> cocococococcococococo </p>",
+    };
       console.log("ok");
-      ///вывод файлов в папке
-      fs.readdir(`.`, (err, data) => {
-        console.log(data);
-        data.forEach(file => {
-          console.log(file + ` ` + path.extname(file));
-          console.log(fs.statSync(`./` + file).size);
-        });
-      });
+      console.log(JSON.stringify(errore_html));
+      response.end(JSON.stringify(errore_html));
+      
     } else {
       console.log("ne ok");
+      
     }
-
-    // // изменяем данные полученного объекта
-    // user.name = user.name + " Smith";
-    // user.age += 1;
-    // // отправляем измененый объект обратно клиенту
-    // response.end(JSON.stringify(user));
   }
   else {
     fs.readFile("index.html", (error, data) => response.end(data));
