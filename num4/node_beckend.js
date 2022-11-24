@@ -85,9 +85,9 @@ else {
 });
  request.on(`end`, () => {
    console.log(body);
-   let params = parse(body);
-   console.log(params);
-   console.log(params.hi);
+  //  let params = parse(body);
+  //  console.log(params);
+  //  console.log(params.hi);
    response.end(`ok`);
  })
 }

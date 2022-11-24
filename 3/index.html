@@ -1,138 +1,166 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Login form</title>
 
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-            .wrapper {
-                min-height: 100%;
-                position: relative;
-            }
-            body {
-                background-color: #E5E5E5; 
-            }
-            .content {
-               
-            }
-            .sign_in_bar {
-                position: relative;
-                width: 360px;
-                height: 308px;
-                border: 1px solid #E4E8EB;
-                border-radius: 8px;
-                background-color: #ffffff;
-                margin-left:auto;
-                margin-right: auto;
-                margin-top: 12%;   
-                text-align: center;
-                z-index: -2; 
-            }
-            .login_bar {
-                position: static;
-                border-radius: 6px;
-                border: 1px solid #D0D7DD;
-                margin: 10px auto;
-                font-size: 14px;
-                width: 280px;
-                height: 32px;
-                outline: none;
-                text-indent: 6px; 
-                z-index: 2;  
-            }
-            .sign_in_button {
-                position: static;
-                border-radius: 20px;
-                background-color: #107F8C;
-                margin: 40px auto;
-                font-size: 14px;
-                width: 280px;
-                height: 40px;
-                border: none;
-                color: #ffffff;
-                z-index: 2;
-            }
+<head>
+    <meta charset="utf-8">
+    <title>Sign in</title>
 
-            button:hover {
-                background-color: #005E7F;
-            }
+    <style>
+        @font-face {
+            font-family: 'SB Sans Interface';
+            src: url('fonts/SBSANSUI-REGULAR.eot');
+            src: local('☺'), url('fonts/SBSANSUI-REGULAR.ttf') format('truetype'), url('fonts/SBSANSUI-REGULAR.svg') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-            h2{
-                font-size: 16px;
-            }
-            /* .load_animation {
-                width: 40px;
-                height: 40px;
-                background-color: #ffffff; 
-                border-radius: 50%;
-                border: 4px solid #ffffff;
-                border-top-color: blue;
-                border-image: linear-gradient(to right, rgb(236, 43, 9), rgb(43, 6, 252));
-                left: 50%;
-                top: 35%;
-                position: absolute ; 
-                opacity: 1;
+        * {
+            font-family: SB Sans Interface;
+            box-sizing: border-box;
+        }
 
-                animation-name: load_anim;
-                animation-duration: 1s;
-                animation-timing-function: linear;
-                animation-iteration-count: 3;
-                animation-delay: 1s, 0.5s;  
-            } */
-            .load_animation {
+        .wrapper {
+            width: 100%;
+            height: 50%;
             position: absolute;
-            width: 40px;
-            height: 40px;
-            margin: 30px;
-            border-radius: 50px;
-            background: rgb(125, 129, 127);
+            top: 0;
+            left: 0;
+            overflow: auto;
+        }
+
+        body {
+
+            background-color: #E5E5E5;
+        }
+
+        .sign_in_form {
+            background-color: #E5E5E5;
+            height: 100%;
+            width: 360px;
+            height: 308px;
+            border: 1px solid #E4E8EB;
+            border-radius: 8px;
+            background-color: #ffffff;
+            margin: 50%;
+            padding: 40px;
+            margin: 100px auto;
+            margin-left: auto;
+            margin-right: auto;
             text-align: center;
-            left: 50%;
-            top: 65%;
-            }
-            
-            .load_animation:before{
-            content: "";
+        }
+
+        .login_bar {
+            border-radius: 6px;
+            border: 1px solid #D0D7DD;
+            margin: 10px auto;
+            font-size: 14px;
+            width: 280px;
+            height: 32px;
+            outline: none;
+            text-indent: 6px;
+            position: static;
+
+        }
+
+        .sign_in_button {
+            border-radius: 20px;
+            background-color: #107F8C;
+            margin: 40px auto;
+            font-size: 14px;
+            width: 280px;
+            height: 40px;
+            border: none;
+            color: #ffffff;
+            position: relative;
+
+        }
+
+        button:hover {
+            background-color: #005E7F;
+        }
+
+        h2 {
+            font-size: 16px;
+        }
+
+        .animation_box {
+            width: 50px;
+            height: 50px;
+            background: conic-gradient(white, #0b20e0);
             position: absolute;
-            top: -4px;
-            bottom: -4px;
-            left: -4px;
-            right: -4px;
-            background: conic-gradient(white,#0b20e0);
             border-radius: 50px;
-            z-index: -1;
-            
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            border: none;
+
             animation-name: load_anim;
             animation-duration: 1s;
-            animation-timing-function: linear;
-            animation-iteration-count: 3;
-            animation-delay: 1s, 0.5s;  
-            }
+        }
 
-            @keyframes load_anim{
-                to {
-                    transform: rotate(360deg);
-                }
-            }
+        .statick_box {
+            width: 40px;
+            height: 40px;
+            margin: 10%;
+            background-color: rgb(255, 255, 255);
+            border-radius: 50px;
+            border: none;
+        }
 
-        </style>
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="content">
-                <div class="load_animation"></div>
-                <div class="sign_in_bar">
-                    <form>
-                        <h2>Вход в панель «Туризм»</h2> 
-                        <input class="login_bar" type="text" placeholder="Логин"><br>
-                        <input class="login_bar" type="password" placeholder="Пароль"> <br>
-                        <button class="sign_in_button">Войти</button> 
-                    </form>
-                </div>
+        @keyframes load_anim {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="sign_in_form">
+            <h2>Вход в панель Туризм</h2>
+            <input class="login_bar" id="login" type="search" size="55" placeholder="Логин"><br>
+            <input class="login_bar" id="pass" type="password" size="55" placeholder="Пароль"> <br>
+            <div class="animation_box">
+                <div class="statick_box"></div>
             </div>
+            <button class="sign_in_button" onclick="get_value_input()">Войти</button>
         </div>
-    </body>
+    </div>
+    <script>
+        function get_value_input() {
+            let login_inp = document.getElementById("login");
+            let pass_inp = document.getElementById("pass");
+            request_to_server(login_inp.value, pass_inp.value);
+        }
+
+        function request_to_server(login_fun, pass_fun) {
+            // данные для отправки
+            const auth = {
+                login_send: login_fun,
+                pass_send: pass_fun,
+            };
+            // кодируем объект в формат json
+            const data = JSON.stringify(auth);
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/user");
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    const user = JSON.parse(xhr.responseText)
+                    console.log(user.name, "-", user.age);
+                } else {
+                    console.log("Server response: ", xhr.statusText);
+                }
+            };
+            xhr.send(data);
+        }
+    </script>
+</body>
+
 </html>
