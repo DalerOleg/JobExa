@@ -9,7 +9,7 @@
         @font-face {
             font-family: 'SB Sans Interface';
             src: url('fonts/SBSANSUI-REGULAR.eot');
-            src: local('☺️'), url('fonts/SBSANSUI-REGULAR.ttf') format('truetype'), url('fonts/SBSANSUI-REGULAR.svg') format('svg');
+            src: url('fonts/SBSANSUI-REGULAR.ttf') format('truetype'), url('fonts/SBSANSUI-REGULAR.svg') format('svg');
             font-weight: normal;
             font-style: normal;
         }
@@ -34,7 +34,6 @@
         }
 
         .sign_in_form {
-
             height: 100%;
             width: 360px;
             height: 308px;
@@ -47,6 +46,7 @@
             margin-left: auto;
             margin-right: auto;
             text-align: center;
+            display: block;
         }
 
         .login_bar {
@@ -72,6 +72,7 @@
             border: none;
             color: #ffffff;
             position: relative;
+            display: block;
 
         }
 
@@ -126,17 +127,39 @@
 
         .direct {
             width: 360px;
-            height: 308px;
+            height: 120px;
             border: 1px solid #E4E8EB;
             border-radius: 8px;
-            background-color: #f04b4b;
-            margin: 50%;
-            padding: 40px;
+            background-color: #ffffff;
+            padding: 40px,5px,40px,5px;
+            padding-bottom: 40px;
             margin: 100px auto;
             margin-left: auto;
             margin-right: auto;
             text-align: center;
+            position: relative;
             display: none;
+        }
+        
+
+        .btn {
+            border-radius: 8px;
+            background-color: #E4E8EB;
+            margin: 5px auto;
+            font-size: 14px;
+            width: 280px;
+            height: 40px;
+            border: 2px;
+            color: #005E7F;
+            position: relative;
+            text-align: left;
+            padding: 2px,2px,2px,10px;
+            text-indent: 6px;
+        }
+
+        
+        .btn:hover{
+            background-color: #c7effd;
         }
 
         @keyframes load_anim {
@@ -144,14 +167,22 @@
                 transform: rotate(360deg);
             }
         }
+
+        .service {
+            text-align: left;
+            margin-left: 20px;
+            
+        }
     </style>
 </head>
 
 <body>
 
     <div class="wrapper">
-        <div class="direct"></div>
-        <div class="sign_in_form">
+        <div class="direct" id="dir1">
+            <div id="dir2"></div>
+        </div>
+        <div class="sign_in_form" id="signInForm">
             <h2>Вход в панель Туризм</h2>
             <input class="login_bar" id="login" type="search" size="55" placeholder="Логин"><br>
             <input class="login_bar" id="pass" type="password" size="55" placeholder="Пароль"> <br>
@@ -159,12 +190,12 @@
             <div class="animation_box">
                 <div class="statick_box"></div>
             </div>
-            <button class="sign_in_button" onclick="get_value_input(), add()">Войти</button>
+            <button class="sign_in_button" id="mainButt" onclick="get_value_input()">Войти</button>
         </div>
     </div>
     <script>
         let serverMessage;
-
+        let fileArray = [];
         function get_value_input() {
             let login_inp = document.getElementById("login");
             let pass_inp = document.getElementById("pass");
@@ -179,32 +210,80 @@
             };
             // кодируем объект в формат json
             const data = JSON.stringify(auth);
-            const xhr = new XMLHttpRequest();
+            const xhrAuth = new XMLHttpRequest();
 
-            xhr.open("POST", "/user");
-            xhr.setRequestHeader("Content-Type", "application/json");
+            xhrAuth.open("POST", "/user");
+            xhrAuth.setRequestHeader("Content-Type", "application/json");
 
-            xhr.onload = () => {
-                if (xhr.status == 200) {
+            xhrAuth.onload = () => {
+                if (xhrAuth.status == 200) {
                     //console.log("Server response: ", xhr.statusText);
-                    serverMessage = xhr.responseText;
+                    serverMessage = xhrAuth.responseText;
                     changeFront(serverMessage)
 
                 } else {
-                    console.log("Server response: ", xhr.statusText);
+                    console.log("Server response: ", xhrAuth.statusText);
                 }
             };
-            xhr.send(data);
+            xhrAuth.send(data);
         }
-
+        /// функция авторизации
         function changeFront(command) {
-            console.log(command);
-            if (command == true) {
-                document.getElementById('sign_in_err').style.display = 'none';
+            if (command == 'autoriz OK') {
+                request_to_take_dir()
                 console.log(command + "!!!!");
             } else {
                 document.getElementById('sign_in_err').style.display = 'block';
             }
+        }
+
+        function request_to_take_dir() {
+            const textReq = "reqToDir";
+            const xhrDir = new XMLHttpRequest();
+
+            xhrDir.open("POST", "/dirRes");
+            xhrDir.setRequestHeader("Content-Type", "application/text");
+
+            xhrDir.onload = () => {
+                if (xhrDir.status == 200) {
+                    let serverMessage2 = xhrDir.responseText;
+                    fileArray = serverMessage2.split(',');
+                    document.getElementById('sign_in_err').style.display = 'none';
+                    butttnsCenter(fileArray.length);
+                } else {
+                    console.log("Server response: ", xhrDir.statusText);
+                }
+            };
+            xhrDir.send(textReq);
+        }
+
+        function butttnsCenter(buttonNum) {
+            document.getElementById('dir1').style.display = 'block';
+
+            let welcome = document.createElement('h1');
+            welcome.textContent = 'Добро пожаловать';
+            dir2 = document.getElementById("dir2");
+            dir2.parentNode.appendChild(welcome);
+
+            let service = document.createElement('h2');
+            service.classList.add('service');
+            service.textContent = 'Сервисы';
+            dir2 = document.getElementById("dir2");
+            dir2.parentNode.appendChild(service);
+            document.getElementById('signInForm').style.display = 'none';
+            
+            let winHeight = 0;
+            for (let x = 0; x <= buttonNum -1 ; x++) {
+                let button = document.createElement('button');
+                button.classList.add('btn');
+                button.textContent = fileArray[x]; 
+                dir2 = document.getElementById("dir2");
+                dir2.parentNode.appendChild(button);
+                winHeight += 40;
+            }
+            console.log(winHeight);
+            document.getElementById('dir1').style.height = `auto`;
+            //document.getElementById('dir1').style.height = winHeight+40;
         }
         //     const fs = require("fs");
         //     fs.readdir("./", (err, repository) => {
@@ -212,7 +291,7 @@
         //     repository.forEach(file => {
         //     });
         //   });
-        
+
     </script>
 </body>
 

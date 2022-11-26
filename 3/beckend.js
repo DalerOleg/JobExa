@@ -12,21 +12,36 @@ http.createServer(async (request, response) => {
 
     if (user.login_send == "login1" && user.pass_send == "pass1") {
       console.log("ok");
-      let fileArr = []
-        
+      response.end("autoriz OK");
+    } else {
+      console.log("ne ok");
+      response.end(null);
+    }
+  }
+  else {
+    fs.readFile("index.html", (error, data) => response.end(data));
+    console.log("Пустой запрос")
+  }
+
+  if (request.url == "/dirRes") {
+    const buffers = [];
+    for await (const chunk of request) {
+      buffers.push(chunk);
+    }
+    const textReq = Buffer.concat(buffers).toString();
+    if (textReq == 'reqToDir') {
+      let fileArr = [], fileArrMess;
+
       fs.readdir("./", (err, repository) => {
-        console.log(repository);
-        repository.forEach(file => { 
+        repository.forEach(file => {
           fileArr.push(file);
           console.log(fileArr);
         });
+        fileArrMess = fileArr.toString();
+        response.end(fileArrMess);
       });
-      
-      response.end(fileArr);
-    } else {
-      console.log("ne ok");
-      response.end(`false`);
     }
+
   }
   else {
     fs.readFile("index.html", (error, data) => response.end(data));
