@@ -9,7 +9,7 @@
         @font-face {
             font-family: 'SB Sans Interface';
             src: url('fonts/SBSANSUI-REGULAR.eot');
-            src: local('☺'), url('fonts/SBSANSUI-REGULAR.ttf') format('truetype'), url('fonts/SBSANSUI-REGULAR.svg') format('svg');
+            src: local('☺️'), url('fonts/SBSANSUI-REGULAR.ttf') format('truetype'), url('fonts/SBSANSUI-REGULAR.svg') format('svg');
             font-weight: normal;
             font-style: normal;
         }
@@ -34,7 +34,7 @@
         }
 
         .sign_in_form {
-            background-color: #E5E5E5;
+
             height: 100%;
             width: 360px;
             height: 308px;
@@ -119,9 +119,24 @@
             color: rgb(250, 0, 0);
             position: absolute;
             text-align: center;
-            padding: 5px;
+            padding: 8px;
             display: none;
 
+        }
+
+        .direct {
+            width: 360px;
+            height: 308px;
+            border: 1px solid #E4E8EB;
+            border-radius: 8px;
+            background-color: #f04b4b;
+            margin: 50%;
+            padding: 40px;
+            margin: 100px auto;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            display: none;
         }
 
         @keyframes load_anim {
@@ -135,6 +150,7 @@
 <body>
 
     <div class="wrapper">
+        <div class="direct"></div>
         <div class="sign_in_form">
             <h2>Вход в панель Туризм</h2>
             <input class="login_bar" id="login" type="search" size="55" placeholder="Логин"><br>
@@ -143,10 +159,12 @@
             <div class="animation_box">
                 <div class="statick_box"></div>
             </div>
-            <button class="sign_in_button" onclick="get_value_input()">Войти</button>
+            <button class="sign_in_button" onclick="get_value_input(), add()">Войти</button>
         </div>
     </div>
     <script>
+        let serverMessage;
+
         function get_value_input() {
             let login_inp = document.getElementById("login");
             let pass_inp = document.getElementById("pass");
@@ -157,7 +175,7 @@
             // данные для отправки
             const auth = {
                 login_send: login_fun,
-                pass_send: pass_fun,
+                pass_send: pass_fun
             };
             // кодируем объект в формат json
             const data = JSON.stringify(auth);
@@ -168,40 +186,33 @@
 
             xhr.onload = () => {
                 if (xhr.status == 200) {
-                    const user = JSON.parse(xhr.responseText);
-                    console.log("Server response!!!!: ", xhr.statusText);
-                    document.getElementById("login") = 111;
+                    //console.log("Server response: ", xhr.statusText);
+                    serverMessage = xhr.responseText;
+                    changeFront(serverMessage)
+
                 } else {
                     console.log("Server response: ", xhr.statusText);
                 }
             };
             xhr.send(data);
-
-            console.log("err1");
-            function getData(url) {
-                console.log("err2");
-                const response = fetch(url);
-
-                if (!response.ok) {
-                    console.log("err3");
-                    throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response.status}`);
-                }
-                console.log("err4");
-                return response.json();
-                console.log("err5");
-
-            };
-
-            console.log("err6");
-            getData(`http://127.0.0.1:3000/3/index.html`).then((data) => console.log(data));
         }
 
-
-
-        // function animation_change() {
-
-        // }
-
+        function changeFront(command) {
+            console.log(command);
+            if (command == true) {
+                document.getElementById('sign_in_err').style.display = 'none';
+                console.log(command + "!!!!");
+            } else {
+                document.getElementById('sign_in_err').style.display = 'block';
+            }
+        }
+        //     const fs = require("fs");
+        //     fs.readdir("./", (err, repository) => {
+        //     console.log(repository);
+        //     repository.forEach(file => {
+        //     });
+        //   });
+        
     </script>
 </body>
 
