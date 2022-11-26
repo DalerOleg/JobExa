@@ -13,16 +13,20 @@ http.createServer(async (request, response) => {
     console.log("----------------");
 
     if (user.login_send == "login1" && user.pass_send == "pass1") {
-      const errore_html = {
-        html_code: "<p> cocococococcococococo </p>",
-    };
       console.log("ok");
-      console.log(JSON.stringify(errore_html));
-      response.end(JSON.stringify(errore_html));
-      
+      //вывод файлов в папке
+      fs.readdir(`./`, (err, repository) => {
+        console.log(repository);
+        repository.forEach(file => {
+          console.log(fs.statSync(`./` + file).size);
+        });
+      });
+      response.end();
     } else {
+      
       console.log("ne ok");
       
+
     }
   }
   else {

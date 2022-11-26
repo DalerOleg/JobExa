@@ -1,168 +1,87 @@
 <!DOCTYPE html>
-<html>
-
-<head>
+<html lang="en-us">
+  <head>
     <meta charset="utf-8">
-    <title>Sign in</title>
 
-    <style>
-        @font-face {
-            font-family: 'SB Sans Interface';
-            src: url('fonts/SBSANSUI-REGULAR.eot');
-            src: local('☺'), url('fonts/SBSANSUI-REGULAR.ttf') format('truetype'), url('fonts/SBSANSUI-REGULAR.svg') format('svg');
-            font-weight: normal;
-            font-style: normal;
-        }
+    <title>Our superheroes</title>
 
-        * {
-            font-family: SB Sans Interface;
-            box-sizing: border-box;
-        }
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-        .wrapper {
-            width: 100%;
-            height: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            overflow: auto;
-        }
+  <body>
 
-        body {
+      <header>
 
-            background-color: #E5E5E5;
-        }
+      </header>
 
-        .sign_in_form {
-            background-color: #E5E5E5;
-            height: 100%;
-            width: 360px;
-            height: 308px;
-            border: 1px solid #E4E8EB;
-            border-radius: 8px;
-            background-color: #ffffff;
-            margin: 50%;
-            padding: 40px;
-            margin: 100px auto;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
+      <section>
 
-        .login_bar {
-            border-radius: 6px;
-            border: 1px solid #D0D7DD;
-            margin: 10px auto;
-            font-size: 14px;
-            width: 280px;
-            height: 32px;
-            outline: none;
-            text-indent: 6px;
-            position: static;
+      </section>
 
-        }
-
-        .sign_in_button {
-            border-radius: 20px;
-            background-color: #107F8C;
-            margin: 40px auto;
-            font-size: 14px;
-            width: 280px;
-            height: 40px;
-            border: none;
-            color: #ffffff;
-            position: relative;
-
-        }
-
-        button:hover {
-            background-color: #005E7F;
-        }
-
-        h2 {
-            font-size: 16px;
-        }
-
-        .animation_box {
-            width: 50px;
-            height: 50px;
-            background: conic-gradient(white, #0b20e0);
-            position: absolute;
-            border-radius: 50px;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            margin: auto;
-            border: none;
-
-            animation-name: load_anim;
-            animation-duration: 1s;
-        }
-
-        .statick_box {
-            width: 40px;
-            height: 40px;
-            margin: 10%;
-            background-color: rgb(255, 255, 255);
-            border-radius: 50px;
-            border: none;
-        }
-
-        @keyframes load_anim {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="wrapper">
-        <div class="sign_in_form">
-            <h2>Вход в панель Туризм</h2>
-            <input class="login_bar" id="login" type="search" size="55" placeholder="Логин"><br>
-            <input class="login_bar" id="pass" type="password" size="55" placeholder="Пароль"> <br>
-            <div class="animation_box">
-                    <div class="statick_box"></div>
-                </div>
-            <button class="sign_in_button" onclick="get_value_input()">Войти</button>
-        </div>
-    </div>
     <script>
-        function get_value_input() {
-            let login_inp = document.getElementById("login");
-            let pass_inp = document.getElementById("pass");
-            request_to_server(login_inp.value, pass_inp.value);
+
+    async function populate() {
+
+      const requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+      const request = new Request(requestURL);
+
+      const response = await fetch(request);
+      const superHeroesText = await response.text();
+
+      const superHeroes = JSON.parse(superHeroesText);
+      populateHeader(superHeroes);
+      populateHeroes(superHeroes);
+
+    }
+
+    function populateHeader(obj) {
+      const header = document.querySelector('header');
+      const myH1 = document.createElement('h1');
+      myH1.textContent = obj.squadName;
+      header.appendChild(myH1);
+
+      const myPara = document.createElement('p');
+      myPara.textContent = `Hometown: ${obj.homeTown} // Formed: ${obj.formed}`;
+      header.appendChild(myPara);
+    }
+
+    function populateHeroes(obj) {
+      const section = document.querySelector('section');
+      const heroes = obj.members;
+
+      for (const hero of heroes) {
+        const myArticle = document.createElement('article');
+        const myH2 = document.createElement('h2');
+        const myPara1 = document.createElement('p');
+        const myPara2 = document.createElement('p');
+        const myPara3 = document.createElement('p');
+        const myList = document.createElement('ul');
+
+        myH2.textContent = hero.name;
+        myPara1.textContent = `Secret identity: ${hero.secretIdentity}`;
+        myPara2.textContent = `Age: ${hero.age}`;
+        myPara3.textContent = 'Superpowers:';
+
+        const superPowers = hero.powers;
+        for (const power of superPowers) {
+          const listItem = document.createElement('li');
+          listItem.textContent = power;
+          myList.appendChild(listItem);
         }
 
-        function request_to_server(login_fun, pass_fun) {
+        myArticle.appendChild(myH2);
+        myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
+        myArticle.appendChild(myList);
 
-            // данные для отправки
-            const auth = {
-                login_send: login_fun,
-                pass_send: pass_fun,
-            };
-            console.log(auth);
-            // кодируем объект в формат json
-            const data = JSON.stringify(auth);
-            const xhr = new XMLHttpRequest();
+        section.appendChild(myArticle);
+      }
+    }
 
-            xhr.open("POST", "/user");
-            xhr.setRequestHeader("Content-Type", "application/json");
+    populate();
 
-            xhr.onload = () => {
-                if (xhr.status == 200) {
-                    const user = JSON.parse(xhr.responseText)
-                    console.log(user.name, "-", user.age);
-                } else {
-                    console.log("Server response: ", xhr.statusText);
-                }
-            };
-            xhr.send(data);
-        }
     </script>
-</body>
-
+  </body>
 </html>
