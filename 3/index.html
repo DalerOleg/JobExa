@@ -74,9 +74,10 @@
             position: relative;
             display: block;
 
+
         }
 
-        button:hover {
+        .sign_in_button:hover {
             background-color: #005E7F;
         }
 
@@ -88,7 +89,7 @@
             width: 50px;
             height: 50px;
             background: conic-gradient(white, #0b20e0);
-            position: absolute;
+            position: relative;
             border-radius: 50px;
             top: 0;
             right: 0;
@@ -99,7 +100,7 @@
             display: none;
 
             animation-name: load_anim;
-            animation-duration: 1s;
+            animation-duration: 2s;
         }
 
         .statick_box {
@@ -109,6 +110,7 @@
             background-color: rgb(255, 255, 255);
             border-radius: 50px;
             border: none;
+            position: absolute;
         }
 
         .err_send {
@@ -131,7 +133,7 @@
             border: 1px solid #E4E8EB;
             border-radius: 8px;
             background-color: #ffffff;
-            padding: 40px,5px,40px,5px;
+            padding: 40px, 5px, 40px, 5px;
             padding-bottom: 40px;
             margin: 100px auto;
             margin-left: auto;
@@ -140,10 +142,11 @@
             position: relative;
             display: none;
         }
-        
+
 
         .btn {
-            border-radius: 8px;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
             background-color: #E4E8EB;
             margin: 5px auto;
             font-size: 14px;
@@ -153,13 +156,29 @@
             color: #005E7F;
             position: relative;
             text-align: left;
-            padding: 2px,2px,2px,10px;
+            padding: 2px, 2px, 2px, 10px;
             text-indent: 6px;
+            
         }
 
-        
-        .btn:hover{
+
+        /* .btn:hover {
             background-color: #c7effd;
+        }
+        .btn1:hover {
+            background-color: #c7effd;
+        } */
+       
+        .btn1 {
+            position: relative;
+            background-color: #E4E8EB;
+            width: 40px;
+            height: 40px;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border: none;
+
+            
         }
 
         @keyframes load_anim {
@@ -171,7 +190,7 @@
         .service {
             text-align: left;
             margin-left: 20px;
-            
+
         }
     </style>
 </head>
@@ -187,20 +206,35 @@
             <input class="login_bar" id="login" type="search" size="55" placeholder="Логин"><br>
             <input class="login_bar" id="pass" type="password" size="55" placeholder="Пароль"> <br>
             <div class="err_send" id="sign_in_err">Логин или пароль введен неверно!</div>
-            <div class="animation_box">
+            <div class="animation_box" id="animation">
                 <div class="statick_box"></div>
             </div>
-            <button class="sign_in_button" id="mainButt" onclick="get_value_input()">Войти</button>
+            <button class="sign_in_button" id="mainButt" onclick="animation()">Войти</button>
         </div>
     </div>
     <script>
         let serverMessage;
         let fileArray = [];
+
+        //setTimeout( , 10000)
+
+        function animation() {
+            document.getElementById('mainButt').style.display = 'none';
+            document.getElementById('animation').style.display = 'block';
+            get_value_input();
+            
+            setTimeout(function un_animation() {
+                document.getElementById('mainButt').style.display = 'block';
+                document.getElementById('animation').style.display = 'none';
+            }, 1500);
+
+        }
+
         function get_value_input() {
             let login_inp = document.getElementById("login");
             let pass_inp = document.getElementById("pass");
             request_to_server(login_inp.value, pass_inp.value);
-        }
+        };
 
         function request_to_server(login_fun, pass_fun) {
             // данные для отправки
@@ -217,7 +251,6 @@
 
             xhrAuth.onload = () => {
                 if (xhrAuth.status == 200) {
-                    //console.log("Server response: ", xhr.statusText);
                     serverMessage = xhrAuth.responseText;
                     changeFront(serverMessage)
 
@@ -271,26 +304,24 @@
             dir2 = document.getElementById("dir2");
             dir2.parentNode.appendChild(service);
             document.getElementById('signInForm').style.display = 'none';
-            
-            let winHeight = 0;
-            for (let x = 0; x <= buttonNum -1 ; x++) {
+
+            for (let x = 0; x <= buttonNum - 1; x++) {
                 let button = document.createElement('button');
                 button.classList.add('btn');
-                button.textContent = fileArray[x]; 
+                button.id = x;
+                button.textContent = fileArray[x];
                 dir2 = document.getElementById("dir2");
                 dir2.parentNode.appendChild(button);
-                winHeight += 40;
+                let b = x;
+                let minibtt = document.createElement('button');
+                minibtt.classList.add('btn1');
+                minibtt.textContent = ">";
+                b = document.getElementById(b);
+                b.parentNode.appendChild(minibtt);
             }
-            console.log(winHeight);
             document.getElementById('dir1').style.height = `auto`;
-            //document.getElementById('dir1').style.height = winHeight+40;
+
         }
-        //     const fs = require("fs");
-        //     fs.readdir("./", (err, repository) => {
-        //     console.log(repository);
-        //     repository.forEach(file => {
-        //     });
-        //   });
 
     </script>
 </body>
