@@ -2,8 +2,8 @@ const http = require("http");
 const fs = require("fs");
 
 const { Telegraf } = require('telegraf')
-const bot = new Telegraf('5989244834:AAE7w6UfzPsd6Aey_omTY1AnnVwYB93QSrs') // ссылка на бота http://t.me/Badestbotonplanet_bot
-const adminId = '1376103570' // можно поменять для теста
+const bot = new Telegraf('5989244834:AAE7w6UfzPsd6Aey_omTY1AnnVwYB93QSrs') 
+const adminId = '1376103570' // id аккаунта в telegram
 
 const Ncache = require("node-cache")
 const cache = new Ncache({ stdTTL: 60, checkperiod: 120 })
@@ -22,12 +22,12 @@ http.createServer(async (request, response) => {
       response.end("autoriz OK");
 
       bot.start((ctx) => {
-        ctx.reply('Добро пожаловать, можете мне не писать, я не отвечу. Ваш, Бот!')
-        ctx.telegram.sendMessage(adminId, 'Логин пользователя: ' + user.login_send)
+        ctx.reply('hello world!')
+        ctx.telegram.sendMessage(adminId, 'Логин авторизованного пользователя: ' + user.login_send)
       })
-      bot.command('info', (ctx) => ctx.reply('Я создан ТОЛЬКО для того, чтобы показать навыки Хозяина'))
+      bot.command('info', (ctx) => ctx.reply('я ничего не умею'))
       bot.telegram.sendMessage(adminId, 'Логин пользователя: ' + user.login_send)
-      bot.launch()// знаю что крашит при обновлении страницы, не могу понять как прекращать работу бота при обновлении страницы
+      bot.launch();
 
     } else {
       console.log("ne ok");
@@ -50,14 +50,13 @@ http.createServer(async (request, response) => {
 
       fs.readdir("./", (err, repository) => {
         repository.forEach(file => {
-          //кэштрование
+          //кэширование
           try {
             const success = cache.set('key', repository, 60)
             console.log(success)
         } catch (error) {
             console.log('error')
         }
-        ///
         fileArr.push(file);
         console.log(fileArr);
         });

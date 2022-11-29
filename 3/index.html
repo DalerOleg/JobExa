@@ -269,6 +269,20 @@
                 document.getElementById('sign_in_err').style.display = 'block';
             }
         }
+        function download_file(fileName) {
+            const xhrDown = new XMLHttpRequest();
+            xhrDown.open("GET","/downloadFile");
+            xhrDown.setRequestHeader("Content-Type", "application/text");
+            xhrDown.onload = () => {
+                if (xhrDown.status == 200) {
+                    serverMessage = xhrDown.responseText;
+                    changeFront(serverMessage)
+                    console.log("Оно живое");
+                } else {
+                    console.log("Server response: ", xhrDown.statusText);
+                }
+            };
+        }
 
         function request_to_take_dir() {
             const textReq = "reqToDir";
@@ -309,6 +323,9 @@
                 let button = document.createElement('button');
                 button.classList.add('btn');
                 button.id = x;
+                document.querySelector('button').onclick = function() {
+                    download_file(fileArray[x]);
+                };
                 button.textContent = fileArray[x];
                 dir2 = document.getElementById("dir2");
                 dir2.parentNode.appendChild(button);
