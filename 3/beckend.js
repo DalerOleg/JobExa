@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs");
 
 const { Telegraf } = require('telegraf')
-const bot = new Telegraf('5989244834:AAE7w6UfzPsd6Aey_omTY1AnnVwYB93QSrs') 
+const bot = new Telegraf('5989244834:AAE7w6UfzPsd6Aey_omTY1AnnVwYB93QSrs')
 const adminId = '1376103570' // id аккаунта в telegram
 
 const Ncache = require("node-cache")
@@ -54,18 +54,31 @@ http.createServer(async (request, response) => {
           try {
             const success = cache.set('key', repository, 60)
             console.log(success)
-        } catch (error) {
+          } catch (error) {
             console.log('error')
-        }
-        fileArr.push(file);
-        console.log(fileArr);
+          }
+          fileArr.push(file);
+          console.log(fileArr);
         });
         fileArrMess = fileArr.toString();
         response.end(fileArrMess);
       });
     }
-
   }
+  ////
+  if (request.url == "/downloadFile") {
+    const buffers = [];
+    for await (const chunk of request) {
+      buffers.push(chunk);
+    }
+    const data = Buffer.concat(buffers).toString();
+
+    
+    console.log(data);
+    response.end(data);
+  }
+  /////
+
   else {
     fs.readFile("index.html", (error, data) => response.end(data));
     console.log("Пустой запрос")

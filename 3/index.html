@@ -158,17 +158,18 @@
             text-align: left;
             padding: 2px, 2px, 2px, 10px;
             text-indent: 6px;
-            
+
         }
 
 
-        /* .btn:hover {
+        .btn:hover {
             background-color: #c7effd;
         }
+
         .btn1:hover {
             background-color: #c7effd;
-        } */
-       
+        }
+
         .btn1 {
             position: relative;
             background-color: #E4E8EB;
@@ -178,7 +179,7 @@
             border-bottom-right-radius: 8px;
             border: none;
 
-            
+
         }
 
         @keyframes load_anim {
@@ -222,7 +223,7 @@
             document.getElementById('mainButt').style.display = 'none';
             document.getElementById('animation').style.display = 'block';
             get_value_input();
-            
+
             setTimeout(function un_animation() {
                 document.getElementById('mainButt').style.display = 'block';
                 document.getElementById('animation').style.display = 'none';
@@ -269,20 +270,30 @@
                 document.getElementById('sign_in_err').style.display = 'block';
             }
         }
+
         function download_file(fileName) {
-            const xhrDown = new XMLHttpRequest();
-            xhrDown.open("GET","/downloadFile");
-            xhrDown.setRequestHeader("Content-Type", "application/text");
-            xhrDown.onload = () => {
-                if (xhrDown.status == 200) {
-                    serverMessage = xhrDown.responseText;
-                    changeFront(serverMessage)
-                    console.log("Оно живое");
-                } else {
-                    console.log("Server response: ", xhrDown.statusText);
-                }
-            };
+            if (fileName !== null) {
+                const xhrDown = new XMLHttpRequest();
+                xhrDown.open("POST", "/downloadFile");
+                xhrDown.setRequestHeader("Content-Type", "application/text");
+                xhrDown.onload = () => {
+                    if (xhrDown.status == 200) {
+                        serverMessage = xhrDown.responseText;
+                        console.log("Оно живое");
+
+                        downloadAsFile(serverMessage);
+
+                    } else {
+                        console.log("Server response: ", xhrDown.statusText);
+                    }
+                };
+                xhrDown.send(fileName);
+            }
+            else {
+                console.log("ERROR");
+            }
         }
+
 
         function request_to_take_dir() {
             const textReq = "reqToDir";
@@ -323,12 +334,15 @@
                 let button = document.createElement('button');
                 button.classList.add('btn');
                 button.id = x;
-                document.querySelector('button').onclick = function() {
-                    download_file(fileArray[x]);
-                };
                 button.textContent = fileArray[x];
                 dir2 = document.getElementById("dir2");
                 dir2.parentNode.appendChild(button);
+                let n = button.textContent;
+                button.addEventListener(`click`, function () {
+                    download_file(n);
+                    // console.log(n);
+                });
+
                 let b = x;
                 let minibtt = document.createElement('button');
                 minibtt.classList.add('btn1');
@@ -340,6 +354,18 @@
 
         }
 
+        function downloadAsFile(data) {
+            let a = document.createElement("a");
+            let file = new Blob([data], { type: 'application/text' });
+            // a.href = URL.createObjectURL(file);
+            // a.download = `C:\\Users\\Daler\\Documents\\Job\\jobexa\\3\\${data}`;
+            // a.download = file;
+            console.log();
+            a.setAttribute('href', `http://localhost:3000/${file}`);
+            a.setAttribute('download', 'download');
+            a.click();
+
+        }
     </script>
 </body>
 
