@@ -11,9 +11,9 @@
 // const fs = require(`fs`);
 // const path = require(`path`);
 // const student = require(`./one.json`);
-// const csv = require('csv-parser')
-;// fs.readFile(`test.js`, `utf-8`,(err,data) => {
-//     console.log(data)  ;     
+// const csv = require('csv-parser');
+// fs.readFile(`test.js`, `utf-8`,(err,data) => {
+// console.log(data);     
 // });
 // //way 2
 // let text = fs.readFileSync(`test.js`, `utf-8`);
