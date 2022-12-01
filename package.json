@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "node-cache": "^5.1.2",
+    "telegraf": "^4.11.2"
+  }
+}
