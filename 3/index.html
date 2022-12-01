@@ -217,7 +217,6 @@
         let serverMessage;
         let fileArray = [];
 
-        //setTimeout( , 10000)
 
         function animation() {
             document.getElementById('mainButt').style.display = 'none';
@@ -354,34 +353,16 @@
 
         }
 
-        // function downloadAsFile(data) {
-        //     let a = document.createElement("a");
-        //     let file = new Blob([data], { type: 'application/text' });
-        //     // a.href = URL.createObjectURL(file);
-        //     // a.download = `C:\\Users\\Daler\\Documents\\Job\\jobexa\\3\\${data}`;
-        //     // a.download = file;
-        //     console.log();
-        //     //a.setAttribute('href', `http://localhost:3000/${file}`);
-        //     downloadAsFile(file);
-        //     a.setAttribute('download', 'download');
-        //     a.click();
-
-        // }
-
-        
         async function downloadAsFile(data) {
-            const fileDown = await fetch(img_url);
-            const fileBlob = await file.blob();
+            const fileDown = await fetch(`http://localhost:3000/${data}`);
+            const fileBlob = await fileDown.blob();
             const fileURL = URL.createObjectURL(fileBlob);
-
             const anchor = document.createElement("a");
             anchor.href = fileURL;
-            anchor.download = file_name;
-
+            anchor.download = data;
             document.body.appendChild(anchor);
             anchor.click();
             document.body.removeChild(anchor);
-
             URL.revokeObjectURL(fileURL);
         }
     </script>
