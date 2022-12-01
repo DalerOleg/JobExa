@@ -18,16 +18,51 @@ http.createServer(async (request, response) => {
     const user = JSON.parse(data);
 
     if (user.login_send == "login1" && user.pass_send == "pass1") {
-      const errore_html = {
-        html_code: "<p> cocococococcococococo </p>",
-    };
       console.log("ok");
-      console.log(JSON.stringify(errore_html));
-      response.end(JSON.stringify(errore_html));
-      
+      response.end("autoriz OK");
+
+      bot.start((ctx) => {
+        ctx.reply('hello world!')
+        ctx.telegram.sendMessage(adminId, 'Логин авторизованного пользователя: ' + user.login_send)
+      })
+      bot.command('info', (ctx) => ctx.reply('я ничего не умею'))
+      bot.telegram.sendMessage(adminId, 'Логин пользователя: ' + user.login_send)
+      bot.launch();
+
     } else {
       console.log("ne ok");
-      
+      response.end(null);
+    }
+  }
+  else {
+    fs.readFile("index.html", (error, data) => response.end(data));
+    console.log("Пустой запрос")
+  }
+
+  if (request.url == "/dirRes") {
+    const buffers = [];
+    for await (const chunk of request) {
+      buffers.push(chunk);
+    }
+    const textReq = Buffer.concat(buffers).toString();
+    if (textReq == 'reqToDir') {
+      let fileArr = [], fileArrMess;
+
+      fs.readdir("./", (err, repository) => {
+        repository.forEach(file => {
+          //кэширование
+          try {
+            const success = cache.set('key', repository, 60)
+            console.log(success)
+          } catch (error) {
+            console.log('error')
+          }
+          fileArr.push(file);
+          console.log(fileArr);
+        });
+        fileArrMess = fileArr.toString();
+        response.end(fileArrMess);
+      });
     }
   }
   ////
