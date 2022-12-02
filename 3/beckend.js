@@ -1,5 +1,6 @@
 const http = require("http");
 const fs = require("fs");
+// const request = require('request');
 
 const Ncache = require("node-cache");
 const cache = new Ncache({ stdTTL: 60, checkperiod: 120 });
@@ -76,10 +77,16 @@ const server = http.createServer(async(request, response) => {
     const data = Buffer.concat(buffers).toString();
     //console.log(data);
     response.end(data);
+    
+    // request(data, (err, response, body) => {
+    // if (err) { return console.log(err); }
+    // console.log(body.url);
+    // console.log(body.explanation);
+// });
   }
   else {
     fs.readFile("index.html", (error, data) => response.end(data));
-    console.log("Пустой запрос");
+    //console.log("Пустой запрос");
   }
 });
 server.listen(3000, "localhost", () => {
