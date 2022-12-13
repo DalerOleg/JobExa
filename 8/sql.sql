@@ -7,8 +7,8 @@ CREATE TABLE t (
 
 CREATE TABLE m (
     merchant_id	SERIAL PRIMARY KEY NOT NULL,
-    latitude	numeric NOT NULL,
-	longtitude	numeric NOT NULL,
+    latitude	geometry NOT NULL,
+	longtitude	geometry NOT NULL,
 	mcc_cd	integer NOT NULL
 );
 
