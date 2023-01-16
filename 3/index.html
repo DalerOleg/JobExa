@@ -300,10 +300,7 @@
                 xhrDown.onload = () => {
                     if (xhrDown.status == 200) {
                         serverMessage = xhrDown.responseText;
-                        //console.log("Оно живое");
-
                         downloadAsFile(serverMessage);
-
                     } else {
                         console.log("Server response: ", xhrDown.statusText);
                     }
@@ -376,9 +373,12 @@
         }
 
         async function downloadAsFile(data) {
-            const fileDown = await fetch(`http://127.0.0.1:3000/${data}`);
+          // const fileDown = await fetch(`http://127.0.0.1:3000/${data}`);
+           const fileDown = await fetch(`http://127.0.0.1:3000`);
+            console.log(fileDown);
             const fileBlob = await fileDown.blob();
             const fileURL = URL.createObjectURL(fileBlob);
+            console.log(fileURL);
             const anchor = document.createElement("a");
             anchor.href = fileURL;
             anchor.download = data;

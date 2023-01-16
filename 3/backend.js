@@ -9,7 +9,8 @@ const Ncache = require("node-cache");
 const cache = new Ncache({ stdTTL: 60, checkperiod: 120 });
 
 // задание номер 7
-const { Telegraf } = require('telegraf')
+const { Telegraf } = require('telegraf');
+const { reverse } = require("dns");
 const bot = new Telegraf('5989244834:AAE7w6UfzPsd6Aey_omTY1AnnVwYB93QSrs');
 const adminId = '1376103570' // id аккаунта в telegram
 
@@ -80,28 +81,33 @@ const server = http.createServer(async(request, response) => {
     }
   }
   
+  
+  // if (urlPath == "/downloadFile") {
+  //   server.post('/downloadFile', (req, res) => {
+  //     const buffers = [];
+  //       buffers.push(chunk);
+  //     const data = Buffer.concat(buffers).toString();
+  //     response.end(data);
+  //   })
+  //   }
+  //   else {
+  //     fs.readFile("index.html", (error, data) => response.end(data));
+  //   }
+
   if (urlPath == "/downloadFile") {
     const buffers = [];
     for await (const chunk of request) {
       buffers.push(chunk);
     }
     const data = Buffer.concat(buffers).toString();
-    //console.log(data);
     response.end(data);
-    
-    // request(data, (err, response, body) => {
-    // if (err) { return console.log(err); }
-    // console.log(body.url);
-    // console.log(body.explanation);
-    // });
   }
   else {
     fs.readFile("index.html", (error, data) => response.end(data));
-    //console.log("Пустой запрос");
   }
 });
 server.listen(protID, hostName, () => {
-  console.log(`Сервер запущен по адресу http://${hostName}:${protID}/`);
+  console.log(`Сервер запущен по адресу http://${hostName}:${protID}`);
 });
 
 
