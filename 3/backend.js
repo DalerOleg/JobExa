@@ -1,5 +1,7 @@
 const http = require("http");
 const fs = require("fs");
+const path = require('path');
+
 
 const protID = 3000;
 const hostName = `127.0.0.1`;
@@ -102,15 +104,17 @@ const server = http.createServer(async(request, response) => {
     const data = Buffer.concat(buffers).toString();
     console.log(data);
     response.end(data);
-    app.get( "/3" ,(req, res) => {
-       const rs = fs.createReadStream(`C:/Users/Daler/Documents/Job/jobexa/3/${data}`);
-       res.setheader("Content-Disposition");
-       rs.pipe(res);
-    });
-    app.get("/3", (req, res) => {
-      // express.js
-      res.download(`C:/Users/Daler/Documents/Job/jobexa/3/${data}`);
-    });
+    // console.log(data);
+    //    app.post( "http://127.0.0.1:3000" ,(req, res) => {
+    //    const rs = fs.createReadStream(`C:/Users/Daler/Documents/Job/jobexa/3/${data}`);
+    //    res.setheader("Content-Disposition", `attachment; ${data}`);
+    //    rs.pipe(res);
+    //    res.download(`C:/Users/Daler/Documents/Job/jobexa/3/${data}`);
+    // });
+    // app.post("http://127.0.0.1:3000/downloadFile", (req, res) => {
+    //   // express.js
+    //   res.download(`C:/Users/Daler/Documents/Job/jobexa/3/${data}`);
+    // });
   }
   else {
     fs.readFile("index.html", (error, data) => response.end(data));
