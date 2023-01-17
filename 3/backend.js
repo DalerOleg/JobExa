@@ -100,7 +100,17 @@ const server = http.createServer(async(request, response) => {
       buffers.push(chunk);
     }
     const data = Buffer.concat(buffers).toString();
+    console.log(data);
     response.end(data);
+    app.get( "/3" ,(req, res) => {
+       const rs = fs.createReadStream(`C:/Users/Daler/Documents/Job/jobexa/3/${data}`);
+       res.setheader("Content-Disposition");
+       rs.pipe(res);
+    });
+    app.get("/3", (req, res) => {
+      // express.js
+      res.download(`C:/Users/Daler/Documents/Job/jobexa/3/${data}`);
+    });
   }
   else {
     fs.readFile("index.html", (error, data) => response.end(data));

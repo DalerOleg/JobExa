@@ -373,9 +373,9 @@
         }
 
         async function downloadAsFile(data) {
-          // const fileDown = await fetch(`http://127.0.0.1:3000/${data}`);
-           const fileDown = await fetch(`http://127.0.0.1:3000`);
-            console.log(fileDown);
+          const fileDown = await fetch(`http://127.0.0.1:3000/${data}`);
+          // const fileDown = await fetch(`C://Users//Daler//Documents//Job//jobexa//3//${data}`);
+            console.log(data);
             const fileBlob = await fileDown.blob();
             const fileURL = URL.createObjectURL(fileBlob);
             console.log(fileURL);
